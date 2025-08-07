@@ -1,7 +1,6 @@
 package com.secureapp.loginapp.model;
 
 import jakarta.persistence.*;
-import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "users")
@@ -11,19 +10,15 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+
     @Column(nullable = false, unique = true)
     private String username;
 
     private String password;
+
     private String role;
 
-    // ✅ OTP-related fields
-    private String email;
-    private String otp;
-    private LocalDateTime otpGeneratedAt;
-
-    // === Getters and Setters ===
-
+    // Getters and setters
     public Long getId() {
         return id;
     }
@@ -54,31 +49,5 @@ public class User {
 
     public void setRole(String role) {
         this.role = role;
-    }
-
-    // ✅ ADD THESE for OTP + email:
-
-    public String getOtp() {
-        return otp;
-    }
-
-    public void setOtp(String otp) {
-        this.otp = otp;
-    }
-
-    public LocalDateTime getOtpGeneratedAt() {
-        return otpGeneratedAt;
-    }
-
-    public void setOtpGeneratedAt(LocalDateTime otpGeneratedAt) {
-        this.otpGeneratedAt = otpGeneratedAt;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 }
