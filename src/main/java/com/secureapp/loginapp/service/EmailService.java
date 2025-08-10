@@ -1,22 +1,19 @@
 package com.secureapp.loginapp.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 @Service
 public class EmailService {
+    private final JavaMailSender mailSender;
+    public EmailService(JavaMailSender mailSender) { this.mailSender = mailSender; }
 
-    @Autowired
-    private JavaMailSender mailSender;
-
-    public void sendOtpEmail(String toEmail, String otp) {
-        SimpleMailMessage message = new SimpleMailMessage();
-        message.setTo(toEmail);
-        message.setSubject("Your OTP Code");
-        message.setText("Your OTP is: " + otp + "\nIt will expire in 5 minutes.");
-
-        mailSender.send(message);
+    public void sendSimpleMail(String to, String subject, String text) {
+        SimpleMailMessage msg = new SimpleMailMessage();
+        msg.setTo(to);
+        msg.setSubject(subject);
+        msg.setText(text);
+        mailSender.send(msg);
     }
 }
